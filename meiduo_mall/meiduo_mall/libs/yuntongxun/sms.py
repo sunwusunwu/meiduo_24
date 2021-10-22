@@ -1,15 +1,19 @@
 # -*- coding:utf-8 -*-
 
-from .CCPRestSDK import REST
+from celery_tasks.sms.yuntongxun.CCPRestSDK import REST
 
 # 说明：主账号，登陆云通讯网站后，可在"控制台-应用"中看到开发者主账号ACCOUNT SID
-_accountSid = '8a216da8662360a4016696e56a9b365a'
+# _accountSid = '8a216da8662360a4016696e56a9b365a'
+_accountSid = '8aaf07087b52c64e017b66db76fc0591'
+
 
 # 说明：主账号Token，登陆云通讯网站后，可在控制台-应用中看到开发者主账号AUTH TOKEN
-_accountToken = '1eb7343c59284d428411203da32d358c'
+# _accountToken = '1eb7343c59284d428411203da32d358c'
+_accountToken = '4e120db56b3d4556ba3af036845fce90'
 
 # 请使用管理控制台首页的APPID或自己创建应用的APPID
-_appId = '8a216da8662360a4016696e56af43661'
+# _appId = '8a216da8662360a4016696e56af43661'
+_appId = '8aaf07087b52c64e017b66db78130597'
 
 # 说明：请求地址，生产环境配置成app.cloopen.com
 # _serverIP = 'sandboxapp.cloopen.com'
@@ -55,7 +59,6 @@ class CCP(object):
             cls._instance.rest.setAppId(_appId)
         return cls._instance
 
-
     def send_template_sms(self, to, datas, temp_id):
         """发送模板短信"""
         # @param to 手机号码
@@ -68,9 +71,10 @@ class CCP(object):
             return 0
         else:
             # 返回-1 表示发送失败
-            return -1
+            return result.get('statusCode')
 
 
 # if __name__ == '__main__':
 #     # 注意： 测试的短信模板编号为1
-#     CCP().send_template_sms('17600992168', ['1234', 5], 1)
+#     res = CCP().send_template_sms('15556616638', ['1234', 5], 1)
+#     print(res)
